@@ -9,7 +9,6 @@ module.exports = {
   list,
   create,
   destroy,
-  listOne,
   update
   // deleteAll
 //   show,

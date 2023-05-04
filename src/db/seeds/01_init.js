@@ -4,7 +4,7 @@ const User = require('../models/user');
  * @returns { Promise<void> }
  */
 exports.seed = async (knex) => {
-  await User.deleteAll(); //comment if seed running issues says truncate
+  // await User.deleteAll(); //comment if seed running issues says truncate
   await knex('posts').del()
   await knex('likes').del()
   await knex('comments').del()

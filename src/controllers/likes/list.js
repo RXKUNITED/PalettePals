@@ -1,9 +1,9 @@
 //list comments under certain post
-const listPosts = async (req, res) => {
-    const { Post } = req.db;
-    const post = await Post.list();
-    res.send(post);
+const listLikes = async (req, res) => {
+    const { Like } = req.db;
+    const like = await Like.list();
+    res.send(like);
   };
   
-  module.exports = listPosts;
+  module.exports = listLikes;
   

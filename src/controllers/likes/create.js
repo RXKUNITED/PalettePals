@@ -1,14 +1,13 @@
-const createComment = async (req, res) => {
-    const {
-      db: { comment },
-      body: { comment },
-    } = req;
+const createLike = async (req, res) => {
+  const {
+    db: { Like },
+    body: { user_id, post_id },
+  } = req;
 
-    const post = await Comment.create(comment);
-    // session.userId = user.id;
-  
-    res.send(post);
-  };
-  
-  module.exports = createComment;
-  
+  const like = await Like.create(user_id, post_id);
+  // session.userId = user.id;
+
+  res.send(like);
+};
+
+module.exports = createLike;
