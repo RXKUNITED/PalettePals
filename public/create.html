@@ -6,20 +6,49 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="./styles/style.css">
   <script type="module" src="./scripts/create.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
   <title>Sign Up</title>
 </head>
 <body>
-  <nav id="main-nav"></nav>
+  <nav id="main-nav" class="logBar"></nav>
+  <figure id="logo">
+    <img src="images/logo.png">
+  </figure>
   <main>
-    <h1 id="sign-up">Sign Up Today!</h1>
-    <form id="create-form" aria-describedby="sign-up">
+    <!-- <form id="create-form" aria-describedby="sign-up">
       <label for="username">Username</label>
       <input type="text" name="username" id="username" autocomplete="username">
       <label for="password">Password</label>
       <input type="password" name="password" id="password" autocomplete="password">
 
       <button type="submit">Create User</button>
-    </form>
+    </form> -->
+    <div id="form">
+      <form class="box" id="create-form" aria-describedby="sign-up">
+        <h1 class="is-size-3 has-text-weight-bold has-text-centered">Create Your Account</h1>
+        <div id="accountBoxTop">
+          <h1 class="is-size-4 has-text-weight-bold" id="sign-up">Sign-up</h1>
+          <a class="button" href="/">Home</a>
+        </div>
+        <div class="field">
+          <label class="label">Username</label>
+          <div class="control">
+            <input class="input is-danger" type="text" name="username" id="username" autocomplete="new-password"
+              placeholder="Username">
+          </div>
+        </div>
+
+        <div class="field">
+          <label class="label">Password</label>
+          <div class="control">
+            <input class="input is-danger" type="password" name="password" id="password" autocomplete="new-password"
+              placeholder="********">
+          </div>
+        </div>
+        <button class="button is-rounded logButtons" type="submit">Sign-up</button>
+        <p class="has-text-centered">-OR-</p>
+        <a href="./login.html" class="logButtons button is-rounded">Sign in</a>
+      </form>
   </main>
 </body>
 </html>

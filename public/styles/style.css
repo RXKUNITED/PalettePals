@@ -1,5 +1,29 @@
 body {
   font-family: sans-serif;
+  background: rgb(160, 207, 217);
+    background: linear-gradient(151deg, rgba(160, 207, 217, 1) 35%, rgba(93, 196, 218, 1) 100%);
+    background-size: cover;
+    min-height: 100vh;
+}
+
+.logBar{
+  display:none !important;
+}
+
+#logo{
+  display: flex;
+    justify-content: center;
+    padding: 30px 0;
+}
+
+#logo{
+    -webkit-filter: drop-shadow(5px 5px 5px #666666);
+    filter: drop-shadow(5px 5px 5px #666666);
+}
+
+#main-nav{
+  display: flex;
+  justify-content: space-evenly;
 }
 
 nav {
@@ -18,7 +42,52 @@ nav ul li:first-child {
   flex-grow: 1;
 }
 
+#create-form {
+  width: 60%;
+  aspect-ratio: 1/ .5;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+
+#form {
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+}
+
+#accountBoxTop{
+  display:flex;
+  justify-content: space-between;
+}
+
+input {
+  border-color: #d96055 !important;
+}
+
+.logButtons {
+  background-color: #d96055 !important;
+  width:100%;
+  color: white !important;
+}
+
+.logButtons:hover {
+  background-color: #c42b01 !important;
+  color: white;
+}
+
 #secret-container {
   text-align: center;
   border: black 1px dashed;
 }
+ v
+.profileName{
+  font-size: 25vw;
+}
+
+/* .profileSection{
+  display: flex;
+  align-items:center;
+  justify-content:space-evenly;
+} */
