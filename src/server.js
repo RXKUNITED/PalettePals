@@ -11,7 +11,7 @@ app.use(handleCookieSessions);
 app.use(logRoutes);
 app.use(express.json());
 app.use(express.static(path.join(__dirname, '..', 'public')));
-
+//puts api in front of any url 
 app.use('/api', routes);
 
 module.exports = app;
