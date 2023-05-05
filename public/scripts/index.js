@@ -1,19 +1,26 @@
-/* eslint-disable import/extensions */
 import {
   fetchLoggedInUser,
+  getFetchOptions,
   handleFetch,
   setNav,
-} from './global.js';
+} from "./global.js";
+
+const redirectToLogin = () => window.location.assign("/login.html"); 
 
 const main = async () => {
   const user = await fetchLoggedInUser();
+  if (!user) return redirectToLogin();
   setNav(!!user);
+}
 
-  const [secret, _err] = await handleFetch('/api/logged-in-secret');
-  console.log('secret, _err:', secret, _err);
-  if (secret) {
-    document.querySelector('#secret-message').textContent = secret.msg;
-  }
-};
+const getPosts = async () => {
+  // const user = await fetchLoggedInUser()
+  // console.log(user.id)
+  
+  // console.log(posts)
+  let data =  await handleFetch('/posts');
+  console.log(data)
+}
 
-main();
+main()
+getPosts();

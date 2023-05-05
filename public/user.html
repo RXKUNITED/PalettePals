@@ -14,27 +14,34 @@
 <body>
   <nav id="main-nav"></nav>
   <main>
-    <section class="section is-small profileSection">
+    <section class="section profileSection">
       <figure class="image is-128x128">
         <img src="https://as2.ftcdn.net/v2/jpg/01/60/28/25/1000_F_160282536_phkmQJ06kTyA8mAYnCXvWKrfup1HJVCz.jpg"
           class="is-rounded" />
       </figure>
-      <h1 class="has-text-weight-bold profileName" id="username"></h1>
+      <h1 class="has-text-weight-bold is-size-3" class="profileName" id="username"></h1>
     </section>
-
-    <p id="rename">Update Username</p>
-    <form id="username-form" aria-labelledby="rename">
-      <label for="username">Username:</label>
-      <input type="text" name="username" id="username-input">
-      <button type="submit">Update Username</button>
-    </form>
-
-    <hr>
-
-    <form id="logout-form" aria-label="logout">
-      <button type="submit">Log Out</button>
-    </form>
+    <div id="buttons">
+      <button class="js-modal-trigger button is-primary mx-4" data-target="modal-js-example"> Edit Username </button>
+      <form id="logout-form" aria-label="logout">
+        <button class="button is-danger mx-4" type="submit">Log Out</button>
+      </form>
+    </div>
   </main>
+  <div id="modal-js-example" class="modal">
+    <div class="modal-background"></div>
+    <div class="modal-content">
+      <div class="box">
+        <p class="mb-2">Edit Username</p>
+        <form id="username-form" aria-labelledby="rename">
+          <label for="username">Username:</label>
+          <input type="text" name="username" id="username-input" class="input is-primary mb-3">
+          <button type="submit" class="button closeModal is-primary">Update Username</button>
+          <button class="button closeModal is-danger" type="button">Close</button>
+        </form>
+      </div>
+    </div>
+  </div>
 </body>
 
 </html>

@@ -7,11 +7,11 @@ class Like {
     this.post_id = post_id;
   }
 
-  static async list() {
+  static async list(id) {
     try {
-      const query = 'SELECT * FROM likes';
-      const { rows } = await knex.raw(query);
-      return rows.map((likes) => new Like(likes));
+      const query = 'SELECT COUNT(id) AS like_count FROM likes WHERE post_id = ?';
+      const { rows } = await knex.raw(query, [id]);
+      return rows[0];
     } catch (err) {
       console.error(err);
       return null;
