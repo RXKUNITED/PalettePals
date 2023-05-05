@@ -21,7 +21,18 @@ class Like {
     try {
       const query = 'SELECT * FROM likes WHERE id = ?';
       const { rows: [like] } = await knex.raw(query, [id]);
-      return post ? new Like(like) : null;
+      return like ? new Like(like) : null;
+    } catch (err) {
+      console.error(err);
+      return null;
+    }
+  }
+  static async findUserLikes(user_id, post_id) {
+    try {
+      const query = 'SELECT * FROM likes WHERE user_id = ? AND post_id = ?';
+      const { rows: [like] } = await knex.raw(query, [user_id, post_id]);
+      return like === undefined ? false : true
+      // return like ? true : false;
     } catch (err) {
       console.error(err);
       return null;

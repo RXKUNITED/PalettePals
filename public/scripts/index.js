@@ -20,6 +20,10 @@ const getPosts = async () => {
   return data[0];
 }
 
+// const likeOptions = async () => {
+//   let body = `{"user_id": "1", "post_id": "3"}`
+//   await getFetchOptions(body)
+// }
 const getLikes = async (id) => {
   let likeAmount = await handleFetch(`api/posts/${id}/likes/`);
   return likeAmount[0]["like_count"];
@@ -54,13 +58,14 @@ addEventListener("DOMContentLoaded", async (event) => {
     pContent.innerText = `${post.username}: ${post.caption}`;
     footerLike.classList.add('card-footer-item');
     footerLike.innerText = 'Like';
-    footerLike.href = '#';
+    // footerLike.href = '';
+    footerLike.setAttribute("id", `likes-${post.id}`)
     footerEdit.classList.add('card-footer-item');
     footerEdit.innerText = 'Edit';
-    footerEdit.href = '#';
+    // footerEdit.href = '#';
     footerDelete.classList.add('card-footer-item');
     footerDelete.innerText = 'Delete';
-    footerDelete.href = '#';
+    // footerDelete.href = '#';
 
     cardDiv.classList.add('my-4');
 
@@ -76,6 +81,37 @@ addEventListener("DOMContentLoaded", async (event) => {
     footer.append(footerEdit);
     footer.append(footerDelete);
     postDiv.append(cardDiv);
+    let user = await fetchLoggedInUser();
+    console.log(user["id"])
+    const removeLikes = async (id) => {
+      let removed = await handleFetch(`/likes/:${id}`)
+      return removed;
+      }
+    const addLikes = async () => {
+      const body = {
+        user_id: user["id"],
+        post_id: post.id,
+      };
+      // let body = "{`user_id`:" + user["id"] +  ",`post_id`:" +  post.id + `}`;
+      let likes = await handleFetch(`api/likes`, getFetchOptions(body))
+      return likes;
+    }
+    let clickCount = 0;
+    let likesButton = document.querySelector(`#likes-${post.id}`)
+    likesButton.addEventListener("click",async (e)=>{
+      if(clickCount % 2 === 0){
+        addLikes();
+        let newLike = await getLikes(post.id);
+        likeCount.innerText = `Likes: ` + newLike;
+        footerLike.innerText = "Unlike"
+      } else {
+        removeLikes();
+        let newLike = await getLikes(post.id);
+        likeCount.innerText = `Likes: ` + newLike;
+        footerLike.innerText = "Like";
+      }
+
+    })
   }
 });
 
