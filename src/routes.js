@@ -31,7 +31,7 @@ Router.get('/posts/:id', postController.listOne);
 Router.get("/posts/:id/likes", likeController.list);
 // checkAuthentication middleware is applied to only to this route (and /logged-in-secret)
 Router.get('/logged-in-secret', checkAuthentication, (_req, res) => {
-  res.send({ msg: 'The secret is: there is no secret.' });
+  res.send({ msg: 'Welcome!' });
 });
 
 // Update

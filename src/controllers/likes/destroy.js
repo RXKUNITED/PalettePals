@@ -3,9 +3,8 @@ const destroy = async (req, res) => {
     const {
         db: { Like },
         params: { id },
-     } = req;
+    } = req;
       const deleted = await Like.delete(Number(id));
-      console.log(deleted)
       res.sendStatus(deleted ? 204 : 404)
 }
 

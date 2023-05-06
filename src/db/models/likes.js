@@ -64,14 +64,7 @@ class Like {
       return null;
     }
   };
-  // static async deleteAll() {
-  //   try {
-  //     return knex.raw('TRUNCATE users;');
-  //   } catch (err) {
-  //     console.error(err);
-  //     return null;
-  //   }
-  // }
+
   static async delete(id) {
     try{
       
