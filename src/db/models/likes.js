@@ -27,6 +27,7 @@ class Like {
       return null;
     }
   }
+
   static async findUserLikes(user_id, post_id) {
     try {
       const query = 'SELECT * FROM likes WHERE user_id = ? AND post_id = ?';
@@ -69,7 +70,6 @@ class Like {
 
   static async delete(user_id, post_id) {
     try{
-      console.log(user_id)
       const query = `DELETE FROM likes WHERE user_id = ? AND post_id = ? RETURNING *`;
     //   //do ? when sending info so that safe from others and question marks reflect  whats in array
     const { rows: [deleted] } = await knex.raw(query, [user_id, post_id]);

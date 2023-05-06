@@ -40,13 +40,15 @@ addEventListener("DOMContentLoaded", async (event) => {
         user_id: user["id"],
         post_id: post.id,
       };
-      console.log(body)
       // let body = "{`user_id`:" + user["id"] +  ",`post_id`:" +  post.id + `}`;
       let likes = await handleFetch(`api/likes`, getFetchOptions(body))
-      console.log("likes", likes)
       return likes;
     }
-    let likesData =  await addLikes();
+    const getLiked = async (user_id,post_id) => {
+      let likeTable = await handleFetch(`api/users/${user_id}/posts/${post_id}/likes`);
+      return likeTable;
+    }
+    let likesData =  await getLiked(user["id"], post.id);
     console.log(likesData, likesData[0])
     let cardDiv = document.createElement('div');
     let imageDiv = document.createElement('div');

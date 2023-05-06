@@ -29,6 +29,7 @@ Router.get('/me', userController.showMe);
 Router.get('/posts', postController.list);
 Router.get('/posts/:id', postController.listOne);
 Router.get("/posts/:id/likes", likeController.list);
+Router.get('/users/:userid/posts/:id/likes', likeController.likeOne);
 // checkAuthentication middleware is applied to only to this route (and /logged-in-secret)
 Router.get('/logged-in-secret', checkAuthentication, (_req, res) => {
   res.send({ msg: 'Welcome!' });
