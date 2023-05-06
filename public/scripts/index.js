@@ -28,7 +28,29 @@ const getLikes = async (id) => {
   let likeAmount = await handleFetch(`api/posts/${id}/likes/`);
   return likeAmount[0]["like_count"];
 }
+const addPost = async (user_id, img_url,caption) =>{
+  const body = {
+    user_id,
+    img_url,
+    caption,
+  };
+  // let body = "{`user_id`:" + user["id"] +  ",`post_id`:" +  post.id + `}`;
+  let posts = await handleFetch(`api/posts`, getFetchOptions(body))
+  return posts;
+}
+const getUser = async () => {
+  let user = await fetchLoggedInUser();
+  return user;
+}
 
+let postForm = document.querySelector("#signup");
+postForm.addEventListener("submit", async (e)=>{
+  e.preventDefault();
+  let user = await getUser();
+  console.log(e.target[1].value)
+  await addPost(user,e.target[0].value, e.target[1].value)
+  console.log(await addPost(user["id"],e.target[0].value, e.target[1].value))
+})
 addEventListener("DOMContentLoaded", async (event) => {
   let posts = await getPosts();
   for(let post of posts){
