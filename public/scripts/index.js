@@ -40,8 +40,10 @@ addEventListener("DOMContentLoaded", async (event) => {
         user_id: user["id"],
         post_id: post.id,
       };
+      console.log(body)
       // let body = "{`user_id`:" + user["id"] +  ",`post_id`:" +  post.id + `}`;
       let likes = await handleFetch(`api/likes`, getFetchOptions(body))
+      console.log("likes", likes)
       return likes;
     }
     let likesData =  await addLikes();
@@ -99,14 +101,15 @@ addEventListener("DOMContentLoaded", async (event) => {
     footer.append(footerDelete);
     postDiv.append(cardDiv);
 
-    const removeLikes = async (id) => {
+    const removeLikes = async (user_id, post_id) => {
       const options = {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json'
         }
       };
-      let removed = await handleFetch(`api/likes/:${id}`,options)
+      console.log(`api/users/${user_id}/posts/${post_id}/likes`)
+      let removed = await handleFetch(`api/users/${user_id}/posts/${post_id}/likes`,options)
       return removed;
       }
 
@@ -117,8 +120,8 @@ addEventListener("DOMContentLoaded", async (event) => {
           let newLike = await getLikes(post.id);
           likeCount.innerText = `Likes: ` + newLike;
           footerLike.innerText = "Unlike";
-        } else {
-        await removeLikes();
+        } else if (footerLike.innerText === "Unlike") {
+        await removeLikes(user["id"], post.id);
         let newLike = await getLikes(post.id);
         likeCount.innerText = `Likes: ` + newLike;
         footerLike.innerText = "Like";

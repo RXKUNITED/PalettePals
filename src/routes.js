@@ -41,7 +41,7 @@ Router.patch('/posts/:id', postController.update);
 // Delete
 Router.delete('/users/logout', userController.logout);
 Router.delete('/posts/:id', postController.destroy);
-Router.delete('/likes/:id', likeController.destroy);
+Router.delete('/users/:userid/posts/:id/likes', likeController.destroy);
 // Router.delete('/posts', destrController.deleteAll);
-
+// api/user/${user_id}/post/${post_id}
 module.exports = Router;
