@@ -5,19 +5,23 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="./styles/style.css">
-  <script type="module" defer src="./scripts/index.js"></script>
+  <script type="module" src="./scripts/index.js"></script>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
   <title>Auth Example</title>
 </head>
 <body>
-  <nav id="main-nav"></nav>
-  <main>
-    <h1>Auth Example</h1>
+  <main id="mainPadding">
+    <div id="navDiv">
+      <a class="is-size-3 has-text-weight-bold"href="/"><p>Post</p></a>
+      <img src="images/logo.png" id="navLogo"/>
+      <a class="is-size-3 has-text-weight-bold" href="./user.html"><p>Profile</p></a>
+    </div>
+    <!-- <h1>Auth Example</h1>
     <p>If you're logged in, you can see the secret message below:</p>
     <section id="secret-container">
       <h2>THE SECRET</h2>
       <p id="secret-message">???</p>
-    </section>
+    </section> -->
     <div id="postDiv">
       
     </div>
@@ -38,7 +42,7 @@
         <a href="#" class="card-footer-item">Delete</a>
       </footer>
     </div> -->
-
+    <nav id="main-nav" class="logBar"></nav>
   </main>
 </body>
 </html>

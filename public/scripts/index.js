@@ -116,7 +116,16 @@ addEventListener("DOMContentLoaded", async (event) => {
 });
 
 
-
+let prevScrollpos = window.pageYOffset;
+window.onscroll = function() {
+  let currentScrollPos = window.pageYOffset;
+  if (prevScrollpos > currentScrollPos) {
+    document.getElementById("navDiv").style.top = "0";
+  } else {
+    document.getElementById("navDiv").style.top = "-175px";
+  }
+  prevScrollpos = currentScrollPos;
+}
 
 main()
 getPosts();
