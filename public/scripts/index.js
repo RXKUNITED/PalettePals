@@ -33,7 +33,7 @@ addEventListener("DOMContentLoaded", async (event) => {
   let posts = await getPosts();
   for(let post of posts){
     let user = await fetchLoggedInUser();
-    console.log(user["id"])
+    // console.log(user["id"])
     let likes = await getLikes(post.id);
     const addLikes = async () => {
       const body = {
@@ -49,7 +49,7 @@ addEventListener("DOMContentLoaded", async (event) => {
       return likeTable;
     }
     let likesData =  await getLiked(user["id"], post.id);
-    console.log(likesData, likesData[0])
+    console.log("hello",likesData)
     let cardDiv = document.createElement('div');
     let imageDiv = document.createElement('div');
     let cardFigure = document.createElement('figure');
@@ -74,7 +74,7 @@ addEventListener("DOMContentLoaded", async (event) => {
     pContent.innerText = `${post.username}: ${post.caption}`;
     footerLike.classList.add('card-footer-item');
     footerLike.innerText = 'Like';
-    if(likesData[0] === null){
+    if(likesData[0] === false){
       footerLike.innerText = 'Unlike';
     } else {
       footerLike.innerText = 'Like';
