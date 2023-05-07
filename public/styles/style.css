@@ -155,3 +155,12 @@ input {
     display: none;
   }
 }
+
+#postToggle{
+  color: #485fc7;
+}
+
+#postToggle:hover{
+  color:black;
+  cursor: pointer;
+}
