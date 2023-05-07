@@ -1,7 +1,7 @@
 const createPost = async (req, res) => {
     const {
       db: { Post },
-      body: { user_id, img_url, caption },
+      body: { user_id, img_url, caption, username },
     } = req;
 
     const post = await Post.create(user_id, img_url, caption);

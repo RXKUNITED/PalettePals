@@ -30,7 +30,7 @@ class Post {
     }
   }
 
-  static async create(user_id, img_url, caption) {
+  static async create(user_id, img_url, caption, username) {
     try {
       const query = `INSERT INTO posts (user_id, img_url, caption)
         VALUES (?, ?, ?) RETURNING *`;
