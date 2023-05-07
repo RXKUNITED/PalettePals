@@ -4,7 +4,7 @@ const createPost = async (req, res) => {
       body: { user_id, img_url, caption, username },
     } = req;
 
-    const post = await Post.create(user_id, img_url, caption);
+    const post = await Post.create(user_id, img_url, caption, username);
     // session.userId = user.id;
   
     res.send(post);
