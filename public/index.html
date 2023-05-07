@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -9,14 +10,18 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
   <title>Auth Example</title>
 </head>
+
 <body>
 
   <main id="mainPadding">
     <div id="navDiv">
       <!-- <a class="is-size-3 has-text-weight-bold"href="/"><p>Post</p></a> -->
-      <p class="is-size-3 has-text-weight-bold js-modal-trigger" id="postToggle" data-target="modal-js-example"> Post </p>
-      <img src="images/logo.png" id="navLogo"/>
-      <a class="is-size-3 has-text-weight-bold" href="./user.html"><p>Profile</p></a>
+      <p class="is-size-3 has-text-weight-bold js-modal-trigger" id="postToggle" data-target="modal-js-example"> Post
+      </p>
+      <img src="images/logo.png" id="navLogo" />
+      <a class="is-size-3 has-text-weight-bold" href="./user.html">
+        <p>Profile</p>
+      </a>
     </div>
     <!-- <h1>Auth Example</h1>
     <p>If you're logged in, you can see the secret message below:</p>
@@ -25,7 +30,7 @@
       <p id="secret-message">???</p>
     </section> -->
     <div id="postDiv">
-      
+
     </div>
     <!-- <div class="card">
       <div class="card-image">
@@ -45,31 +50,53 @@
       </footer>
     </div> -->
     <nav id="main-nav" class="logBar"></nav>
+    <div id="edit-modal" class="modal">
+      <div class="modal-background"></div>
+      
+      <div class="modal-card">
+        <header class="modal-card-head">
+          <p class="modal-card-title">Edit Caption</p>
+          <button class="delete" aria-label="close"></button>
+        </header>
+        <section class="modal-card-body">
+          <form id="editForm">
+            <label class="label">New Caption</label required>
+            <input class="input is-medium" type="text" placeholder="New Caption">
+          </form>
+        </section>
+        <footer class="modal-card-foot">
+          <button class="button is-success" form="editForm" type="submit">Save changes</button>
+          <button class="button">Cancel</button>
+        </footer>
+      </div>
+    </div>
+
     <div id="modal-js-example" class="modal">
       <div class="modal-background"></div>
       <div class="modal-card">
-          <header class="modal-card-head">
-              <p class="modal-card-title">Create a post</p>
-              <button class="delete resetImage" aria-label="close"></button>
-          </header>
-          <section class="modal-card-body">
-              <form id="postForm">
-                  <label class="label">Image Url:</label required>
-                  <input class="input is-medium" id="imgTextBox" type="url" placeholder="Medium input">
-                  <img class="my-3" id="imgPlaceHolder" src="https://developers.elementor.com/docs/assets/img/elementor-placeholder-image.png"/>
-                  <label class="label mt-4">Caption:</label required>
-                  <input class="input is-medium" type="text" placeholder="Medium input">
-              </form>
-          </section>
-          <footer class="modal-card-foot">
-              <button type="submit" class="button is-success resetImage" form="postForm">Post</button>
-              <button class="button resetImage">Cancel</button>
-          </footer>
+        <header class="modal-card-head">
+          <p class="modal-card-title">Create a post</p>
+          <button class="delete resetImage" aria-label="close"></button>
+        </header>
+        <section class="modal-card-body">
+          <form id="postForm">
+            <label class="label">Image Url:</label required>
+            <input class="input is-medium" id="imgTextBox" type="url" placeholder="Eg: https://via.placeholder.com/150x50.png?text=Enter+your+text+here
+            ">
+            <img class="my-3" id="imgPlaceHolder"
+              src="https://developers.elementor.com/docs/assets/img/elementor-placeholder-image.png" />
+            <label class="label mt-4">Caption:</label required>
+            <input class="input is-medium" type="text" placeholder="Caption">
+          </form>
+        </section>
+        <footer class="modal-card-foot">
+          <button type="submit" class="button is-success resetImage" form="postForm">Post</button>
+          <button class="button resetImage">Cancel</button>
+        </footer>
       </div>
-  </div>
-
-  <button class="modal-close is-large" aria-label="close"></button>
-  </div>
+    </div>
+    </div>
   </main>
 </body>
+
 </html>

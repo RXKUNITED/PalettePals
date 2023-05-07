@@ -7,16 +7,16 @@ import {
 
 const postDiv = document.querySelector('#postDiv');
 
-const redirectToLogin = () => window.location.assign("/login.html"); 
+const redirectToLogin = () => window.location.assign("/login.html");
 
 const main = async () => {
   const user = await fetchLoggedInUser();
   if (!user) return redirectToLogin();
-  setNav(!!user);   
+  setNav(!!user);
 }
 
 const getPosts = async () => {
-  let data =  await handleFetch('api/posts');
+  let data = await handleFetch('api/posts');
   return data[0];
 }
 
@@ -28,7 +28,7 @@ const getLikes = async (id) => {
   let likeAmount = await handleFetch(`api/posts/${id}/likes/`);
   return likeAmount[0]["like_count"];
 }
-const addPost = async (user_id, img_url,caption,username) =>{
+const addPost = async (user_id, img_url, caption, username) => {
   const body = {
     user_id,
     img_url,
@@ -54,7 +54,7 @@ const getUser = async () => {
 // })
 addEventListener("DOMContentLoaded", async (event) => {
   let posts = await getPosts();
-  for(let post of posts){
+  for (let post of posts) {
     let user = await fetchLoggedInUser();
     // console.log(user["id"])
     let likes = await getLikes(post.id);
@@ -67,11 +67,11 @@ addEventListener("DOMContentLoaded", async (event) => {
       let likes = await handleFetch(`api/likes`, getFetchOptions(body))
       return likes;
     }
-    const getLiked = async (user_id,post_id) => {
+    const getLiked = async (user_id, post_id) => {
       let likeTable = await handleFetch(`api/users/${user_id}/posts/${post_id}/likes`);
       return likeTable;
     }
-    let likesData =  await getLiked(user["id"], post.id);
+    let likesData = await getLiked(user["id"], post.id);
 
     let cardDiv = document.createElement('div');
     let imageDiv = document.createElement('div');
@@ -97,15 +97,15 @@ addEventListener("DOMContentLoaded", async (event) => {
     pContent.innerText = `${post.username}: ${post.caption}`;
     footerLike.classList.add('card-footer-item');
     footerLike.innerText = 'Like';
-    if(likesData[0] === false){
+    if (likesData[0] === false) {
       footerLike.innerText = 'Unlike';
     } else {
       footerLike.innerText = 'Like';
     }
     // footerLike.href = '';
     footerLike.setAttribute("id", `likes-${post.id}`)
-    footerEdit.classList.add('card-footer-item');
-
+    footerEdit.classList.add('card-footer-item', 'edit-button');
+    footerEdit.setAttribute('data-target', 'edit-modal')
     // footerEdit.href = '#';
     footerDelete.classList.add('card-footer-item');
     footerDelete.innerText = 'Delete';
@@ -122,14 +122,14 @@ addEventListener("DOMContentLoaded", async (event) => {
     content.append(likeCount);
     cardDiv.append(footer);
     footer.append(footerLike);
-    
-    if(post.user_id === user["id"]){
+
+    if (post.user_id === user["id"]) {
       footerEdit.innerText = 'Edit';
       footerEdit.setAttribute("id", `edit-${post.id}`)
       footer.append(footerEdit);
       footer.append(footerDelete);
       postDiv.append(cardDiv);
-      const updatePost = async (post_id, caption) =>{
+      const updatePost = async (post_id, caption) => {
         const body = {
           post_id: post.id,
           caption,
@@ -144,13 +144,22 @@ addEventListener("DOMContentLoaded", async (event) => {
         let updatedPost = await handleFetch(`api/post/:${post.id}`, getFetchOptions(body))
         return updatedPost;
 
-}
+      }
       let updateButton = document.querySelector(`#edit-${post.id}`);
-      updateButton.addEventListener("click",(e)=>{
-      console.log("hi")
-      // updatePost(post.id, caption)
-    
-  })
+      let editModal = document.getElementById('edit-modal');
+      updateButton.addEventListener("click", (e) => {
+        console.log("hi")
+        if (editModal.classList.contains('is-active')) {
+          editModal.classList.remove('is-active');
+          console.log('1')
+        }
+        else {
+          editModal.classList.add('is-active')
+          console.log(2)
+        }
+        // updatePost(post.id, caption)
+
+      })
     } else {
       postDiv.append(cardDiv);
     }
@@ -163,23 +172,23 @@ addEventListener("DOMContentLoaded", async (event) => {
           'Content-Type': 'application/json'
         }
       };
-      let removed = await handleFetch(`api/users/${user_id}/posts/${post_id}/likes`,options)
+      let removed = await handleFetch(`api/users/${user_id}/posts/${post_id}/likes`, options)
       return removed;
-      }
+    }
 
     let likesButton = document.querySelector(`#likes-${post.id}`)
-    likesButton.addEventListener("click", async (e)=>{
-        if(footerLike.innerText === "Like"){
-          await addLikes();
-          let newLike = await getLikes(post.id);
-          likeCount.innerText = `Likes: ` + newLike;
-          footerLike.innerText = "Unlike";
-        } else if (footerLike.innerText === "Unlike") {
+    likesButton.addEventListener("click", async (e) => {
+      if (footerLike.innerText === "Like") {
+        await addLikes();
+        let newLike = await getLikes(post.id);
+        likeCount.innerText = `Likes: ` + newLike;
+        footerLike.innerText = "Unlike";
+      } else if (footerLike.innerText === "Unlike") {
         await removeLikes(user["id"], post.id);
         let newLike = await getLikes(post.id);
         likeCount.innerText = `Likes: ` + newLike;
         footerLike.innerText = "Like";
-        }
+      }
 
     })
     //delete post
@@ -192,9 +201,9 @@ addEventListener("DOMContentLoaded", async (event) => {
       };
       let removed = await handleFetch(`api/posts/${id}`, options)
       return removed;
-      }
-    footerDelete.addEventListener("click", async (e)=>{
-    await removePosts(post.id)
+    }
+    footerDelete.addEventListener("click", async (e) => {
+      await removePosts(post.id)
 
     })
 
@@ -204,7 +213,7 @@ addEventListener("DOMContentLoaded", async (event) => {
 
 
 let prevScrollpos = window.pageYOffset;
-window.onscroll = function() {
+window.onscroll = function () {
   let currentScrollPos = window.pageYOffset;
   if (prevScrollpos > currentScrollPos) {
     document.getElementById("navDiv").style.top = "0";
@@ -217,45 +226,45 @@ window.onscroll = function() {
 document.addEventListener('DOMContentLoaded', () => {
   // Functions to open and close a modal
   function openModal($el) {
-      $el.classList.add('is-active');
+    $el.classList.add('is-active');
   }
 
   function closeModal($el) {
-      $el.classList.remove('is-active');
+    $el.classList.remove('is-active');
   }
 
   function closeAllModals() {
-      (document.querySelectorAll('.modal') || []).forEach(($modal) => {
-          closeModal($modal);
-      });
+    (document.querySelectorAll('.modal') || []).forEach(($modal) => {
+      closeModal($modal);
+    });
   }
 
   // Add a click event on buttons to open a specific modal
   (document.querySelectorAll('.js-modal-trigger') || []).forEach(($trigger) => {
-      const modal = $trigger.dataset.target;
-      const $target = document.getElementById(modal);
+    const modal = $trigger.dataset.target;
+    const $target = document.getElementById(modal);
 
-      $trigger.addEventListener('click', () => {
-          openModal($target);
-      });
+    $trigger.addEventListener('click', () => {
+      openModal($target);
+    });
   });
 
   // Add a click event on various child elements to close the parent modal
   (document.querySelectorAll('.modal-background, .modal-close, .modal-card-head .delete, .modal-card-foot .button, .closeModal') || []).forEach(($close) => {
-      const $target = $close.closest('.modal');
+    const $target = $close.closest('.modal');
 
-      $close.addEventListener('click', () => {
-          closeModal($target);
-      });
+    $close.addEventListener('click', () => {
+      closeModal($target);
+    });
   });
 
   // Add a keyboard event to close all modals
   document.addEventListener('keydown', (event) => {
-      const e = event || window.event;
+    const e = event || window.event;
 
-      if (e.keyCode === 27) { // Escape key
-          closeAllModals();
-      }
+    if (e.keyCode === 27) { // Escape key
+      closeAllModals();
+    }
   });
 });
 
@@ -264,44 +273,44 @@ const imgPlaceHolder = document.getElementById("imgPlaceHolder");
 const imageCache = new Map();
 
 function isValidUrl(url) {
-const urlPattern = /^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$/i;
-return urlPattern.test(url);
+  const urlPattern = /^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$/i;
+  return urlPattern.test(url);
 }
 
 function checkImage(url) {
-if (imageCache.has(url)) {
-  imgPlaceHolder.src = imageCache.get(url).src;
-  return;
-}
+  if (imageCache.has(url)) {
+    imgPlaceHolder.src = imageCache.get(url).src;
+    return;
+  }
 
-const image = new Image();
-image.onload = function() {
-  imgPlaceHolder.src = url;
-  imageCache.set(url, image);
-};
-image.onerror = function() {
-  console.error("Invalid image URL");
-};
-image.src = url;
+  const image = new Image();
+  image.onload = function () {
+    imgPlaceHolder.src = url;
+    imageCache.set(url, image);
+  };
+  image.onerror = function () {
+    console.error("Invalid image URL");
+  };
+  image.src = url;
 }
 
 function debounce(func, wait) {
-let timeoutId;
-return function() {
-  clearTimeout(timeoutId);
-  timeoutId = setTimeout(() => func.apply(this, arguments), wait);
-};
+  let timeoutId;
+  return function () {
+    clearTimeout(timeoutId);
+    timeoutId = setTimeout(() => func.apply(this, arguments), wait);
+  };
 }
 
 const debouncedCheckImage = debounce(checkImage, 500);
 
-imgTextBox.addEventListener("input", function() {
-const imgUrl = imgTextBox.value.trim();
-if (isValidUrl(imgUrl)) {
-  debouncedCheckImage(imgUrl);
-} else {
-  console.error("Invalid URL format");
-}
+imgTextBox.addEventListener("input", function () {
+  const imgUrl = imgTextBox.value.trim();
+  if (isValidUrl(imgUrl)) {
+    debouncedCheckImage(imgUrl);
+  } else {
+    console.error("Invalid URL format");
+  }
 });
 
 let imageResets = document.getElementsByClassName('resetImage');
@@ -315,9 +324,16 @@ let imageResets = document.getElementsByClassName('resetImage');
 let postForm = document.getElementById('postForm');
 postForm.addEventListener('submit', async (e) => {
   let user = await getUser();
-  await addPost(user["id"],e.target[0].value, e.target[1].value, user["username"])
-//   console.log(await addPost(user["id"],e.target[0].value, e.target[1].value))
+  await addPost(user["id"], e.target[0].value, e.target[1].value, user["username"])
+  //   console.log(await addPost(user["id"],e.target[0].value, e.target[1].value))
 })
+
+// let editButton = document.getElementsByClassName('edit-button');
+// for (let button of editButton) {
+//   button.addEventListener('click', () => {
+    
+//   })
+// }
 
 main()
 getPosts();
