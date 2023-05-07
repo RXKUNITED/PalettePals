@@ -28,11 +28,12 @@ const getLikes = async (id) => {
   let likeAmount = await handleFetch(`api/posts/${id}/likes/`);
   return likeAmount[0]["like_count"];
 }
-const addPost = async (user_id, img_url,caption) =>{
+const addPost = async (user_id, img_url,caption,username) =>{
   const body = {
     user_id,
     img_url,
     caption,
+    username
   };
   // let body = "{`user_id`:" + user["id"] +  ",`post_id`:" +  post.id + `}`;
   let posts = await handleFetch(`api/posts`, getFetchOptions(body))
@@ -282,8 +283,10 @@ let imageResets = document.getElementsByClassName('resetImage');
 // }
 
 let postForm = document.getElementById('postForm');
-postForm.addEventListener('submit', (e) => {
-  e.preventDefault();
+postForm.addEventListener('submit', async (e) => {
+  let user = await getUser();
+  await addPost(user["id"],e.target[0].value, e.target[1].value, user["username"])
+//   console.log(await addPost(user["id"],e.target[0].value, e.target[1].value))
   console.log(e.target[0].value);
 })
 
