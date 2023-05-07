@@ -12,21 +12,6 @@
 <body>
 
   <main id="mainPadding">
-    <div class="container">
-			<form action="signup.html" method="post" id="signup">
-				<div class="field">
-					<label for="name">Image Url:</label>
-					<input type="text" id="name" name="name" placeholder="Enter img url" />
-				</div>
-				<div class="field">
-					<label for="email">Email:</label>
-					<input type="text" id="email" name="caption" placeholder="Enter caption" />
-				</div>
-				<div class="field">
-					<button type="submit" class="full">Subscribe</button>
-				</div>
-			</form>
-		</div>
     <div id="navDiv">
       <a class="is-size-3 has-text-weight-bold"href="/"><p>Post</p></a>
       <img src="images/logo.png" id="navLogo"/>
@@ -38,6 +23,7 @@
       <h2>THE SECRET</h2>
       <p id="secret-message">???</p>
     </section> -->
+    <p class="title js-modal-trigger mx-4" id="postToggle" data-target="modal-js-example"> Post </p>
     <div id="postDiv">
       
     </div>
@@ -59,6 +45,31 @@
       </footer>
     </div> -->
     <nav id="main-nav" class="logBar"></nav>
+    <div id="modal-js-example" class="modal">
+      <div class="modal-background"></div>
+      <div class="modal-card">
+          <header class="modal-card-head">
+              <p class="modal-card-title">Create a post</p>
+              <button class="delete resetImage" aria-label="close"></button>
+          </header>
+          <section class="modal-card-body">
+              <form id="postForm">
+                  <label class="label">Image Url:</label required>
+                  <input class="input is-medium" id="imgTextBox" type="url" placeholder="Medium input">
+                  <img class="my-3" id="imgPlaceHolder" src="https://developers.elementor.com/docs/assets/img/elementor-placeholder-image.png"/>
+                  <label class="label mt-4">Caption:</label required>
+                  <input class="input is-medium" type="text" placeholder="Medium input">
+              </form>
+          </section>
+          <footer class="modal-card-foot">
+              <button type="submit" class="button is-success resetImage" form="postForms">Post</button>
+              <button class="button resetImage">Cancel</button>
+          </footer>
+      </div>
+  </div>
+
+  <button class="modal-close is-large" aria-label="close"></button>
+  </div>
   </main>
 </body>
 </html>
