@@ -1,38 +1,38 @@
 body {
   font-family: sans-serif;
   background: rgb(160, 207, 217);
-    background: linear-gradient(151deg, rgba(160, 207, 217, 1) 35%, rgba(93, 196, 218, 1) 100%);
-    background-size: cover;
-    min-height: 100vh;
+  background: linear-gradient(151deg, rgba(160, 207, 217, 1) 35%, rgba(93, 196, 218, 1) 100%);
+  background-size: cover;
+  min-height: 100vh;
 }
 
-.logBar{
-  display:none !important;
+.logBar {
+  display: none !important;
 }
 
-#navLogo{
+#navLogo {
   display: flex;
-    justify-content: center;
-    padding: 30px 0;
-    max-height: 20vh!important;
-    max-width:50%;
-    min-height: 10%!important;
-    filter: invert(100%);
+  justify-content: center;
+  padding: 30px 0;
+  max-height: 20vh !important;
+  max-width: 50%;
+  min-height: 10% !important;
+  filter: invert(100%);
 }
 
-#mainPadding{
+#mainPadding {
   padding-top: 200px;
 }
 
-#logo{
+#logo {
   display: flex;
-    justify-content: center;
-    padding: 30px 0;
-    -webkit-filter: drop-shadow(5px 5px 5px #666666);
-    filter: drop-shadow(5px 5px 5px #666666);
+  justify-content: center;
+  padding: 30px 0;
+  -webkit-filter: drop-shadow(5px 5px 5px #666666);
+  filter: drop-shadow(5px 5px 5px #666666);
 }
 
-#navDiv{
+#navDiv {
   display: flex;
   justify-content: space-evenly;
   align-items: center;
@@ -44,10 +44,11 @@ body {
   left: 0;
   right: 0;
   z-index: 1;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 }
 
-.navLinks{
-  display:block;
+.navLinks {
+  display: block;
 }
 
 nav {
@@ -81,8 +82,8 @@ nav ul li:first-child {
   justify-content: center;
 }
 
-#accountBoxTop{
-  display:flex;
+#accountBoxTop {
+  display: flex;
   justify-content: space-between;
 }
 
@@ -92,7 +93,7 @@ input {
 
 .logButtons {
   background-color: #d96055 !important;
-  width:100%;
+  width: 100%;
   color: white !important;
 }
 
@@ -106,61 +107,102 @@ input {
   border: black 1px dashed;
 }
 
-.profileName{
+.profileName {
   max-width: 5%;
 }
 
-.profileSection{
+.profileSection {
   display: flex;
   flex-direction: column;
-  align-items:center;
+  align-items: center;
   justify-content: center;
 }
 
-#buttons{
+#buttons {
   display: flex;
   justify-content: center;
 }
 
-#buttons button{
+#buttons button {
   min-width: 150px;
 }
 
-.card{
-  min-width: 300px !important;
-  max-width: 500px !important;
-  width:30%;
+.mainButtons{
+  background-color: #485fc7 !important;
 }
 
-#postDiv{
-  display:flex;
+.card {
+  min-width: 300px !important;
+  max-width: 500px !important;
+  width: 30%;
+}
+
+#postDiv {
+  display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-.content{
-  display:flex;
+.content {
+  display: flex;
   justify-content: space-between;
 }
 
-.level{
+.level {
   background-color: white;
 }
 
-@media only screen and (max-width: 700px) {
-  #navDiv{
-    flex-direction: column;
-  }
-  #navDiv p{
-    display: none;
-  }
-}
-
-#postToggle{
+#navDiv{
   color: #485fc7;
 }
 
-#postToggle:hover{
-  color:black;
+#logOutDiv{
+  display:flex;
+  justify-content: center;
+}
+
+#mainFooter a, #userFooter a{
+  color: black;
+}
+
+#postToggle:hover {
+  color: black;
   cursor: pointer;
+}
+
+#mainFooter, #userFooter {
+  width: 100%;
+  background-color: white;
+  color: black;
+  display: none;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  text-align: center;
+  padding: 10px;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+
+@media only screen and (max-width: 700px) {
+  #navDiv {
+    flex-direction: column;
+  }
+
+  #navDiv p {
+    display: none;
+  }
+
+  #mainPadding {
+    padding-top: 150px;
+    padding-bottom: 75px;
+  }
+
+  #mainFooter {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+  #userFooter{
+    display: grid;
+    grid-template-columns: 1fr;
+  }
 }
