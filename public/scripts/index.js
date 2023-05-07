@@ -72,7 +72,7 @@ addEventListener("DOMContentLoaded", async (event) => {
       return likeTable;
     }
     let likesData =  await getLiked(user["id"], post.id);
-    console.log("hello",likesData)
+
     let cardDiv = document.createElement('div');
     let imageDiv = document.createElement('div');
     let cardFigure = document.createElement('figure');
@@ -122,12 +122,39 @@ addEventListener("DOMContentLoaded", async (event) => {
     content.append(likeCount);
     cardDiv.append(footer);
     footer.append(footerLike);
+    
     if(post.user_id === user["id"]){
       footerEdit.innerText = 'Edit';
+      footerEdit.setAttribute("id", `edit-${post.id}`)
       footer.append(footerEdit);
       footer.append(footerDelete);
-    } 
-    postDiv.append(cardDiv);
+      postDiv.append(cardDiv);
+      const updatePost = async (post_id, caption) =>{
+        const body = {
+          post_id: post.id,
+          caption,
+        };
+        let options = {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(data)
+        }
+        let updatedPost = await handleFetch(`api/post/:${post.id}`, getFetchOptions(body))
+        return updatedPost;
+
+}
+      let updateButton = document.querySelector(`#edit-${post.id}`);
+      updateButton.addEventListener("click",(e)=>{
+      console.log("hi")
+      // updatePost(post.id, caption)
+    
+  })
+    } else {
+      postDiv.append(cardDiv);
+    }
+
 
     const removeLikes = async (user_id, post_id) => {
       const options = {
@@ -136,7 +163,6 @@ addEventListener("DOMContentLoaded", async (event) => {
           'Content-Type': 'application/json'
         }
       };
-      console.log(`api/users/${user_id}/posts/${post_id}/likes`)
       let removed = await handleFetch(`api/users/${user_id}/posts/${post_id}/likes`,options)
       return removed;
       }
@@ -171,6 +197,7 @@ addEventListener("DOMContentLoaded", async (event) => {
     await removePosts(post.id)
 
     })
+
     //create post
   }
 });
@@ -290,9 +317,7 @@ postForm.addEventListener('submit', async (e) => {
   let user = await getUser();
   await addPost(user["id"],e.target[0].value, e.target[1].value, user["username"])
 //   console.log(await addPost(user["id"],e.target[0].value, e.target[1].value))
-  console.log(e.target[0].value);
 })
-// let updateButton = document.getlet postForm = document.getElementById('postForm');
 
 main()
 getPosts();
