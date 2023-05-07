@@ -129,33 +129,31 @@ addEventListener("DOMContentLoaded", async (event) => {
       footer.append(footerEdit);
       footer.append(footerDelete);
       postDiv.append(cardDiv);
-      const updatePost = async (post_id, caption) => {
+      const updatePost = async (caption) => {
         const body = {
-          post_id: post.id,
           caption,
         };
-        let options = {
-          method: 'PUT',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify(data)
-        }
-        let updatedPost = await handleFetch(`api/post/:${post.id}`, getFetchOptions(body))
+        const updateOptions = getFetchOptions(body, 'PATCH');
+        let updatedPost = await handleFetch(`api/posts/${post.id}`, updateOptions)
         return updatedPost;
 
       }
       let updateButton = document.querySelector(`#edit-${post.id}`);
       let editModal = document.getElementById('edit-modal');
       updateButton.addEventListener("click", (e) => {
-        console.log("hi")
         if (editModal.classList.contains('is-active')) {
           editModal.classList.remove('is-active');
-          console.log('1')
         }
         else {
           editModal.classList.add('is-active')
-          console.log(2)
+          let editForm = document.getElementById("editForm");
+          editForm.addEventListener("submit", async (e)=>{
+            e.preventDefault();
+            console.log(post.id)
+            await updatePost(e.target[0].value)
+            // console.log(await updatePost(post.id, e.target[0].value))
+            // console.log(e.target[0].value)
+          })
         }
         // updatePost(post.id, caption)
 

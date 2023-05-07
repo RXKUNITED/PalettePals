@@ -11,7 +11,7 @@ module.exports = {
   create,
   destroy,
   listOne,
-  update
+  update,
   // deleteAll
 //   show,
 //   update,
