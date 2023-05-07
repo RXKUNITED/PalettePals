@@ -137,11 +137,11 @@ input {
   width: 30%;
 }
 
-/* #postDiv {
+#postDiv {
   display: flex;
   flex-direction: column;
   align-items: center;
-} */
+}
 
 .content {
   display: flex;
