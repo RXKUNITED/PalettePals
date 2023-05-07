@@ -105,7 +105,7 @@ addEventListener("DOMContentLoaded", async (event) => {
     // footerLike.href = '';
     footerLike.setAttribute("id", `likes-${post.id}`)
     footerEdit.classList.add('card-footer-item');
-    footerEdit.innerText = 'Edit';
+
     // footerEdit.href = '#';
     footerDelete.classList.add('card-footer-item');
     footerDelete.innerText = 'Delete';
@@ -122,8 +122,11 @@ addEventListener("DOMContentLoaded", async (event) => {
     content.append(likeCount);
     cardDiv.append(footer);
     footer.append(footerLike);
-    footer.append(footerEdit);
-    footer.append(footerDelete);
+    if(post.user_id === user["id"]){
+      footerEdit.innerText = 'Edit';
+      footer.append(footerEdit);
+      footer.append(footerDelete);
+    } 
     postDiv.append(cardDiv);
 
     const removeLikes = async (user_id, post_id) => {
@@ -289,6 +292,7 @@ postForm.addEventListener('submit', async (e) => {
 //   console.log(await addPost(user["id"],e.target[0].value, e.target[1].value))
   console.log(e.target[0].value);
 })
+// let updateButton = document.getlet postForm = document.getElementById('postForm');
 
 main()
 getPosts();
