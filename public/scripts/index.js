@@ -94,7 +94,7 @@ addEventListener("DOMContentLoaded", async (event) => {
     content.classList.add("content");
     footer.classList.add("card-footer");
     image.src = post.img_url;
-    pContent.innerText = `${post.username}: ${post.caption}`;
+    pContent.innerText = `@${post.username}: ${post.caption}`;
     footerLike.classList.add('card-footer-item');
     footerLike.innerText = 'Like';
     if (likesData[0] === false) {
@@ -106,7 +106,7 @@ addEventListener("DOMContentLoaded", async (event) => {
     footerLike.setAttribute("id", `likes-${post.id}`)
     footerEdit.classList.add('card-footer-item', 'edit-button');
     footerEdit.setAttribute('data-target', 'edit-modal')
-    // footerEdit.href = '#';
+    // footerEdit.href = '/';
     footerDelete.classList.add('card-footer-item');
     footerDelete.innerText = 'Delete';
     footerDelete.href = '/';
@@ -151,6 +151,8 @@ addEventListener("DOMContentLoaded", async (event) => {
             e.preventDefault();
             console.log(post.id)
             await updatePost(e.target[0].value)
+            pContent.innerText = `@${post.username}: ${e.target[0].value}` 
+            e.target[0].value = '';
             // console.log(await updatePost(post.id, e.target[0].value))
             // console.log(e.target[0].value)
           })

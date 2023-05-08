@@ -131,6 +131,10 @@ input {
   background-color: #485fc7 !important;
 }
 
+.mainButtons:hover{
+  background-color: #2139a3 !important;
+}
+
 .card {
   min-width: 300px !important;
   max-width: 500px !important;
@@ -181,6 +185,11 @@ input {
   text-align: center;
   padding: 10px;
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+
+#line{
+  width:80%;
+  margin: auto;
 }
 
 @media only screen and (max-width: 700px) {

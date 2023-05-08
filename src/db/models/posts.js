@@ -11,7 +11,7 @@ class Post {
 
   static async list() {
     try {
-      const query = 'SELECT posts.*, username FROM posts JOIN users ON posts.user_id = users.id';
+      const query = 'SELECT posts.*, username FROM posts JOIN users ON posts.user_id = users.id ORDER BY posts.created_at DESC';
       const { rows } = await knex.raw(query);
       return rows.map((posts) => new Post(posts));
     } catch (err) {
