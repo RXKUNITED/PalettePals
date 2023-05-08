@@ -174,7 +174,7 @@ addEventListener("DOMContentLoaded", async (event) => {
     // footerEdit.href = '/';
     footerDelete.classList.add('card-footer-item');
     footerDelete.innerText = 'Delete';
-    footerDelete.href = '/';
+    footerDelete.href = '/user.html';
 
     cardDiv.classList.add('my-4');
 
